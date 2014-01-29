@@ -1,0 +1,70 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static admin_modify %}
+{% load admin_urls %}
+
+{% block extrahead %}{{ block.super }}
+<script type="text/javascript" src="{% url 'admin:jsi18n' %}"></script>
+<script type="text/javascript" src="{% static "admin/js/core.js" %}"></script>\
+{{ form.media }}
+{% endblock %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}" />{% endblock %}
+
+{% block coltype %}{% if ordered_objects %}colMS{% else %}colM{% endif %}{% endblock %}
+
+{% block bodyclass %}{{ opts.app_label }}-{{ opts.object_name.lower }} change-form{% endblock %}
+
+{% block content %}
+
+<div id="content-main">
+    <h1>Escoja el tipo de reporte a generar</h1>
+    <form action="report" method="post">{% csrf_token %}
+        {{ form.non_field_errors }}
+        <div style="border:1px solid rgb(204, 204, 204)">
+            <div class="fieldWrapper" style="border:1px solid rgb(238, 238, 238);
+                background: none repeat scroll 0% 0% rgb(237, 243, 254)">
+                {{ form.tipo.errors }}
+                <label for="id_tipo">Tipo:</label>
+                {{ form.tipo }}
+            </div>
+            <div class="fieldWrapper" style="border:1px solid rgb(238, 238, 238)">
+                {{ form.pinicio.errors }}
+                <label for="id_pinicio">Fecha de inicio del reporte:</label>
+                {{ form.pinicio }}
+            </div>
+            <div class="fieldWrapper" style="border:1px solid rgb(238, 238, 238);
+                background: none repeat scroll 0% 0% rgb(237, 243, 254)">
+                {{ form.pfin.errors }}
+                <label for="id_pfin">Fecha final del reporte:</label>
+                {{ form.pfin }}
+            </div>
+        </div>
+        <input class="default" name="_save" type="submit" value="Generar" />
+    </form>
+</div>
+<script>
+    $(function() {
+        //Array para dar formato en español
+        $.datepicker.regional['es'] =
+                {
+                    closeText: 'Cerrar',
+                    prevText: 'Previo',
+                    nextText: 'Próximo',
+                    monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                        'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                    monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
+                        'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                    monthStatus: 'Ver otro mes', yearStatus: 'Ver otro año',
+                    dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                    dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sáb'],
+                    dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
+                    dateFormat: 'dd/mm/yy', firstDay: 0,
+                    initStatus: 'Selecciona la fecha', isRTL: false};
+        $.datepicker.setDefaults($.datepicker.regional['es']);
+        //miDate: fecha de comienzo D=días | M=mes | Y=año
+        //maxDate: fecha tope D=días | M=mes | Y=año
+        $(".dateinput").datepicker({minDate: "-3Y", maxDate: "+1M +10D", dateFormat: "dd/mm/yy"});
+    });
+</script>
+
+{% endblock %}

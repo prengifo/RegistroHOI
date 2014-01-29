@@ -1,0 +1,10 @@
+{% extends "admin/base.html" %}
+{% load i18n %}
+
+{% block title %}{{ title }} | {% trans 'Hospital Ortopedico Infantil. Dirección Docencia' %}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><img style="height:95px" src="{{ STATIC_URL }}/img/logo.jpg" alt="Hospital Ortopedico Infantil"><span style="display: none">Hospital Ortopedico Infantil</span></h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

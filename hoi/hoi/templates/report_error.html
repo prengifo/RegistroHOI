@@ -1,0 +1,32 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static admin_modify %}
+{% load admin_urls %}
+
+{% block extrahead %}{{ block.super }}
+<script type="text/javascript" src="{% url 'admin:jsi18n' %}"></script>
+<script type="text/javascript" src="{% static "admin/js/core.js" %}"></script>
+<script type="text/javascript" src="{% static "admin/js/admin/RelatedObjectLookups.js" %}"></script>
+<script type="text/javascript" src="{% static "admin/js/jquery.min.js" %}"></script>
+<script type="text/javascript" src="{% static "admin/js/report.js" %}"></script>
+<script type="text/javascript" src="{% static "admin/js/admin/DateTimeShortcuts.js" %}"></script>
+<script type="text/javascript" src="{% static "admin/js/calendar.js" %}"></script>
+{{ media }}
+{% endblock %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}" />{% endblock %}
+
+{% block coltype %}{% if ordered_objects %}colMS{% else %}colM{% endif %}{% endblock %}
+
+{% block bodyclass %}{{ opts.app_label }}-{{ opts.object_name.lower }} change-form{% endblock %}
+
+{% block content %}
+
+<div id="content-main">
+    <h1 style="color:#FF0000 ">ERROR!<h1>
+    <h2>El reporte solicitado no tiene datos.</h2>
+    <a href="{% url 'report' %}">
+        <input class="default" name="_save" type="submit" value="Generar" />
+    </a>
+</div>
+
+{% endblock %}

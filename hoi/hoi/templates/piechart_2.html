@@ -1,0 +1,30 @@
+{% load nvd3_tags %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    {% include_chart_jscss %}
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/nvd3/1.1.13-beta/nv.d3.min.js" type="text/css" media="screen" />
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/d3/3.3.9/d3.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/nvd3/1.1.13-beta/nv.d3.js"></script>
+    <script type="text/javascript">
+      {% load_chart charttype chartdata chartcontainer extra %}
+    </script>
+</head>
+<body>
+    <div id="content-main">
+        <div style="padding: 10px;font-size:100%">
+            <div style="display:inline;padding-right:100px;">
+                <img src="{{ STATIC_URL }}/img/logo.jpg"  height="95px">
+            </div>
+            <div style="padding-right:20px;font-size:18px;allign:center;
+                font-family:Lucida Grande,DejaVu Sans,Bitstream Vera Sans,Verdana,Arial,sans-serif">
+                Dirección de Docencia e Investigación.<br>
+                Coordinación Docente Médica
+            </div>
+            <div style="border-style:double; border-width:3px; width:700px">
+                <h2 style="font-family:Arial">Área</h2>
+                {% include_container chartcontainer 400 600 %}
+            </div>
+        </div>
+    </div>
+</body>

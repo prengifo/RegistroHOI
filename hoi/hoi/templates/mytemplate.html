@@ -1,0 +1,103 @@
+{% load i18n %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Planilla</title>
+        <style type="text/css">
+            @page {
+                size: {{ pagesize }};
+                margin: 1cm;
+                @frame footer {
+                    -pdf-frame-content: footerContent;
+                    bottom: 0cm;
+                    margin-left: 9cm;
+                    margin-right: 9cm;
+                    height: 1cm;
+                }
+            }
+        </style>
+    </head>
+    <body>
+      <div style="padding: 10px;font-size:100%">
+	<div style="display:inline;padding-right:100px">
+	  <img src="http://i.imgur.com/YPCORwz.jpg"  width="800">
+        </div>
+        <div style="padding-right:20px;font-size:100%;allign:center">
+	  Dirección de Docencia e Investigación</br>
+
+
+
+
+
+Coordinación Docente Médica</br>
+	</div>
+	<div style="border: 1px #000 solid;padding: 10px;font-size:100%;display:inline-block;height:4cm;width:3cm">
+
+
+	<div style="border: 1px #000 solid;padding: 10px;font-size:100%;display:inline-block;height:4cm;width:3cm">
+	</div>
+      </div>
+        <div style="text-align:center;">
+          <strong><font size="200%">Ficha Personal</font></strong><br><br>
+         <strong>Programa de {{ persona.get_tipo_display }}</strong><br>
+          <strong>En area de {{ persona.get_area_display }}</strong><br>
+          {% with mes1=persona.fecha_inicio|date:"F" mes2=persona.fecha_fin|date:"F" %}
+          <strong>Periodo: {% trans mes1 %} al {{ mes2 }} de {{ persona.fecha_inicio|date:"Y" }}</strong>
+          {% endwith %}
+        </div>
+        <div style="border: 1px solid #000; padding: 10px;font-size: 100%; line-height:1.8em;">
+          <strong>Apellidos:</strong> {{ persona.apellidos }}<br/>
+          <strong>Nombres:</strong> {{ persona.nombres }}<br/>
+          <strong>Documento de identificación:</strong> {{ persona.didentificacion }}
+          <strong>Nacionalidad:</strong> {{ persona.nacionalidad }}
+          <strong>Sexo:</strong> {{persona.get_sexo_display}}<br/>
+          <strong>Edad:</strong> {{persona.edad}}
+          <strong>Lugar de nacimiento:</strong> {{ persona.lugar_nacimiento }}<br/>
+          <strong>Fecha de Nacimiento:</strong> {{ persona.fecha_nacimiento|date:"d/M/Y" }}
+          <strong>Estado Civil:</strong> {{ persona.get_estado_civil_display }}<br/>
+          <strong>Dirección de Habitación:</strong> {{ persona.direccion_habitacion }}<br/>
+          <strong>Teléfonos:</strong> {{ persona.telefonos }}<br/>
+          <strong>Email:</strong> {{ persona.email }}<br/>
+          <strong>Hospital/Instituto de Procedencia:</strong> {{ persona.hospital_procedencia }}<br/>
+          <strong>Teléfonos Hospital/Instituto de Procedencia:</strong> {{ persona.hospital_procedencia_telefono }}<br/>
+          <strong>Dirección Hospital/Instituto de Procedencia:</strong> {{ persona.hospital_procedencia_direccion }}<br/>
+          <strong>Coordinador Docente Hospital/Instituto de Procedencia:</strong> {{ persona.coordinador_docente }}<br/>
+          <strong>Teléfono Coordinador Docente:</strong> {{ persona.telefono_coordinador_docente }}
+          <strong>Email Coordinador Docente:</strong> {{ persona.email_coordinador_docente }}<br/>
+          <strong>En caso de emergencia llamar a: </strong> {{ persona.contacto_emergencia }}
+          <strong>Parentesco: </strong> {{ persona.parentesco_emergencia }}<br/>
+          <strong>Teléfonos: </strong> {{ persona.telefono_emergencia }}<br/>
+          <br/>
+          <strong>Nota Apreciativa Areas: </strong> {{ persona.nota_apreciativa|default_if_none:"(__)" }}%<br/>
+          <strong>Cad: </strong> {{ persona.nota_cadera|default_if_none:"__" }}
+          <strong>Col: </strong> {{ persona.nota_columna|default_if_none:"__" }}
+          <strong>Hom: </strong> {{ persona.nota_hombro|default_if_none:"__" }}
+          <strong>MSIS: </strong> {{ persona.nota_msis|default_if_none:"__" }}
+          <strong>NO: </strong> {{ persona.nota_no|default_if_none:"__" }}
+          <strong>OD: </strong> {{ persona.nota_od|default_if_none:"__" }}
+          <strong>Nota Apreciativa Examenes: </strong> {{ persona.nota_apreciativa1|default_if_none:"(__)" }}%<br/>
+          <strong>Examen 1: </strong> {{ persona.examen1|default_if_none:"__" }}
+          <strong>2: </strong> {{ persona.examen2|default_if_none:"__" }}
+          <strong>3: </strong> {{ persona.examen3|default_if_none:"__" }}
+          <strong>4: </strong> {{ persona.examen4|default_if_none:"__" }}
+          <strong>5: </strong> {{ persona.examen5|default_if_none:"__" }}
+          <strong>6: </strong> {{ persona.examen6|default_if_none:"__" }}<br/>
+	  <strong>Prom: </strong> {{ persona.promedio }}<br/>
+	  <strong>Nota Apreciativa Monografía: </strong> {{ persona.nota_apreciativa2|default_if_none:"(__)" }}%<br/>
+          <strong>Monografía:</strong> {{ persona.monografia|default_if_none:"___" }}
+          <strong>Nota Monografía: </strong> {{ persona.nota_mono|default_if_none:"(__)" }}<br/>
+          <strong>NOTA DEFINITIVA:</strong> {{ persona.nota_definitiva|default_if_none:"___" }}<br>
+           <strong>Amonestaciones:</strong> {{ persona.amonestaciones|default_if_none:"___" }}
+        </div>
+
+        <!-- <br> -->
+        <!-- <div style="float:right;border: 1px #000 solid;height:6.8cm;width:8.8cm"> -->
+        <!-- </div> -->
+
+        <img src="http://i.imgur.com/TjIelIV.jpg" width="800">
+
+    </body>
+</div>
+<!-- <canvas width="100" height="1000" style="border: 1px solid #000;float: right"> Cedula </canvas> -->
+        <!-- <div style="width:500px;height:500px;border:1px solid #000;float: right">Foto</div> -->
+</html>

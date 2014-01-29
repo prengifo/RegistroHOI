@@ -1,0 +1,23 @@
+0.- cd carpetacarpeta/hoi/hoi
+1.- source ~/.venvburrito/startup.sh 
+2.- workon hospital
+3.- python manage.py migrate
+4.- python manage.py syncdb
+5.- python manage.py runserver
+
+http://127.0.0.1:8000/admin
+
+Creo que tu usuario es patrick y clave 1234. Si ese no es el caso:
+python manage.py createsuperuser --username=LOQUEQUIERAS --email=TUCORREO
+
+Para ver los pdfs que saca, todavia no hay ningun boton cool dentro de la pagina tienes que hacer:
+http://127.0.0.1:8000/person/1
+Y se descarga automatico. Luego le ponemos un botoncito dentro de la pagina como tal.
+
+Vas a ver que esta lo de los inventarios ahi tambien. Eso se lo quite en un momento, y no recuerdo donde era,
+asi que omitelo for now.
+
+Como salir del burrito? I have no fucking idea. Cierra la terminal.
+
+
+Tutorial: https://docs.djangoproject.com/en/dev/intro/tutorial01/
