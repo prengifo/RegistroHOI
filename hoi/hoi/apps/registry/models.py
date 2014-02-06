@@ -1,14 +1,14 @@
 from django.db import models
 from django import forms
 
-from django.contrib.admin.widgets import AdminDateWidget 
+from django.contrib.admin.widgets import AdminDateWidget
 # FINE ECHEMOS CODIGO EN ESPANOl.
 
 ESTADO_CIVIL_CHOICES = (
     (0, 'Soltero'),
     (1, 'Casado'),
-    (1, 'Divorciado'),
-    (2, 'Viudo')
+    (2, 'Divorciado'),
+    (3, 'Viudo')
 )
 
 TIPOS = (
@@ -46,6 +46,8 @@ class Persona(models.Model):
     # Datos del semestre
     fecha_inicio = models.DateField('inicio periodo')
     fecha_fin = models.DateField('fin periodo')
+
+    foto = models.ImageField('foto', upload_to='fotos/', null=True, blank=True)
 
     # Datos de la persoan
     apellidos = models.CharField('apellidos', max_length=128)
@@ -129,7 +131,7 @@ class Persona(models.Model):
     @property
     def lugar_nacimiento(self):
         return '%s, %s' % (self.estado_nacimiento, self.pais_nacimiento)
-    
+
 REPORTES = (
     (1, 'Programa'),
     (2, 'Area'),
@@ -143,12 +145,10 @@ class JQueryUIDatepickerWidget(forms.DateInput):
 
     class Media:
         css = {"all":("http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/redmond/jquery-ui.css",)}
-        js = ("http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js", 
+        js = ("http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js",
               "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js",)
-    
+
 class Report(forms.Form):
     tipo = forms.ChoiceField(choices=REPORTES)
     pinicio = forms.DateField(label='Fecha de Inicio del reporte', widget=JQueryUIDatepickerWidget, input_formats=['%d/%m/%Y'])
     pfin = forms.DateField(label='Fecha Final del reporte', widget=JQueryUIDatepickerWidget, input_formats=['%d/%m/%Y'] )
-    
-    

@@ -9,6 +9,13 @@ from cgi import escape
 from django.views import generic
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
+from django.conf import settings
+import os
+
+def fetch_resources(uri, rel):
+    path = os.path.join(settings.MEDIA_ROOT, uri.replace(settings.MEDIA_URL, ""))
+    print path
+    return path
 
 
 def render_to_pdf(template_src, context_dict):
@@ -17,7 +24,7 @@ def render_to_pdf(template_src, context_dict):
     html  = template.render(context)
     result = StringIO.StringIO()
 
-    pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("ISO-8859-1")), result)
+    pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("ISO-8859-1")), result, link_callback=fetch_resources)
     if not pdf.err:
         return HttpResponse(result.getvalue(), mimetype='application/pdf')
     return HttpResponse('We had some errors<pre>%s</pre>' % escape(html))
@@ -32,7 +39,7 @@ def myview(request, pk):
                 # 'mylist': results,
             }
         )
-            
+
 def persona_area(request, fecha_inicio, fecha_fin):
     inicio = fecha_inicio
     fin = fecha_fin
@@ -60,31 +67,31 @@ def persona_area(request, fecha_inicio, fecha_fin):
             ydata = ydata + (new,)
         elif i == 4:
             new = 'Miembros inferiores'
-            ydata = ydata + (new,)            
+            ydata = ydata + (new,)
         elif i == 5:
             new = 'Neuro-Ortopedia'
-            ydata = ydata + (new,)            
+            ydata = ydata + (new,)
         elif i == 6:
             new = 'Medicina fisica y rehabilitacion'
-            ydata = ydata + (new,)            
+            ydata = ydata + (new,)
         elif i == 7:
             new = 'Cirugia de mano'
-            ydata = ydata + (new,)            
+            ydata = ydata + (new,)
         elif i == 8:
             new = 'Pediatria'
-            ydata = ydata + (new,)            
+            ydata = ydata + (new,)
         elif i == 9:
             new = 'Fisioterapia'
-            ydata = ydata + (new,)            
+            ydata = ydata + (new,)
         elif i == 10:
             new = 'Terapia del Lenguaje'
-            ydata = ydata + (new,)            
+            ydata = ydata + (new,)
         elif i == 11:
             new = 'Taller de Ortopedia'
-            ydata = ydata + (new,)            
+            ydata = ydata + (new,)
         elif i == 12:
             new = 'Terapia Ocupacional'
-            ydata = ydata + (new,)                     
+            ydata = ydata + (new,)
     chartdata = {'x': ydata, 'y': xdata}
     charttype = "discreteBarChart"
     chartcontainer = 'piechart_container'
@@ -100,7 +107,7 @@ def persona_area(request, fecha_inicio, fecha_fin):
         }
     }
     return render(request, 'piechart_2.html', data)
-    
+
 def persona_programa(request, fecha_inicio, fecha_fin):
     inicio = fecha_inicio
     fin = fecha_fin
@@ -125,7 +132,7 @@ def persona_programa(request, fecha_inicio, fecha_fin):
             ydata = ydata + (new,)
         elif i == 3:
             new = 'Visitor'
-            ydata = ydata + (new,)         
+            ydata = ydata + (new,)
     chartdata = {'x': ydata, 'y': xdata}
     charttype = "discreteBarChart"
     chartcontainer = 'discretebarchart_container'
@@ -142,7 +149,7 @@ def persona_programa(request, fecha_inicio, fecha_fin):
         }
     }
     return render(request, 'piechart_3.html', data)
-          
+
 def persona_genero(request, fecha_inicio, fecha_fin):
     inicio = fecha_inicio
     fin = fecha_fin
@@ -203,7 +210,7 @@ def report_error(request):
     return render(request, 'report_error.html')
 
 def report(request):
-    if request.method == 'POST': 
+    if request.method == 'POST':
         form = Report(request.POST)
         if form.is_valid():
             tipo = form.cleaned_data['tipo']
