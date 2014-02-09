@@ -104,24 +104,6 @@ class Persona(models.Model):
     # TODO: lugar_aprobacion, fecha_aprobacion?
 
     @property
-    def promedio(self):
-        fields = ['1', '2', '3', '4', '5', '6']
-        count = 0
-        s = 0
-        for mat in fields:
-            field = 'examen{0}'.format(mat)
-            if getattr(self, field):
-                s += getattr(self, field)
-                count += 1
-        if count == 0:
-	    return 0
-	else:
-	    return s/float(count)
-
-    def __unicode__(self):
-        return '{0} {1}'.format(self.nombres, self.apellidos)
-
-    @property
     def edad(self):
         from datetime import date
         today = date.today()
