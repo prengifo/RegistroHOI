@@ -72,13 +72,13 @@ class PersonaAdmin(admin.ModelAdmin):
                 'Visitor'
 
             if obj.estado_civil == 0:
-                tipo ='Soltero'
+                estado_civil ='Soltero'
             elif obj.estado_civil == 1:
-                'Casado'
+                estado_civil = 'Casado'
             elif obj.estado_civil == 2:
-                'Divorciado'
+                estado_civil= 'Divorciado'
             elif obj.estado_civil == 3:
-                'Viudo'
+                estado_civil= 'Viudo'
 
             writer.writerow([
                 smart_str(tipo),
