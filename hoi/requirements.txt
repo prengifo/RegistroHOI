@@ -5,3 +5,4 @@ pisa
 html5lib
 pypdf
 django-nvd3
+xlwt
