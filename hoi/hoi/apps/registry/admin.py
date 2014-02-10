@@ -7,4 +7,5 @@ from models import *
 class PersonaAdmin(admin.ModelAdmin):
     search_fields = ['nombres', 'apellidos', 'didentificacion', 'hospital_procedencia']
 
+
 admin.site.register(Persona, PersonaAdmin)

@@ -51,7 +51,7 @@ def validate_image(fieldfile_obj):
 
 
 class Persona(models.Model):
-    
+
     tipo = models.IntegerField(choices=TIPOS)
     area = models.IntegerField(choices=AREAS)
     # Datos del semestre
@@ -124,6 +124,9 @@ class Persona(models.Model):
     @property
     def lugar_nacimiento(self):
         return '%s, %s' % (self.estado_nacimiento, self.pais_nacimiento)
+
+    def __unicode__(self):
+        return '{0} {1}'.format(self.nombres, self.apellidos)
 
 REPORTES = (
     (1, 'Programa'),
