@@ -2,6 +2,8 @@ from django.db import models
 from django import forms
 
 from django.contrib.admin.widgets import AdminDateWidget
+from django.core.exceptions import ValidationError
+
 # FINE ECHEMOS CODIGO EN ESPANOl.
 
 ESTADO_CIVIL_CHOICES = (
@@ -40,6 +42,14 @@ SEX_CHOICES = (
 )
 
 
+
+def validate_image(fieldfile_obj):
+    filesize = fieldfile_obj.file.size
+    megabyte_limit = 1.0
+    if filesize > megabyte_limit*1024*1024:
+        raise ValidationError("Tamano maximo es %sMB" % str(megabyte_limit))
+
+
 class Persona(models.Model):
     tipo = models.IntegerField(choices=TIPOS)
     area = models.IntegerField(choices=AREAS)
@@ -47,7 +57,7 @@ class Persona(models.Model):
     fecha_inicio = models.DateField('inicio periodo')
     fecha_fin = models.DateField('fin periodo')
 
-    foto = models.ImageField('foto', upload_to='fotos/', null=True, blank=True)
+    foto = models.ImageField('foto', upload_to='fotos/',validators=[validate_image], null=True, blank=True)
 
     # Datos de la persoan
     apellidos = models.CharField('apellidos', max_length=128)
