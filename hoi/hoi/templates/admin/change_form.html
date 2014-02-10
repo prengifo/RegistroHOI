@@ -117,7 +117,7 @@ document.getElementById("id_tipo").setAttribute("onchange", "setOptions(document
 
 {% block after_related_objects %}{% endblock %}
 
-{% block submit_buttons_bottom %}{% submit_row %}{% endblock %}
+{% block submit_buttons_bottom %}{% if perms.registry.add_persona %}{% submit_row %}{% endif %} {% endblock %}
 
 {% if adminform.first_field and add %}
    <script type="text/javascript">document.getElementById("{{ adminform.first_field.id_for_label }}").focus();</script>

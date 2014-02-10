@@ -41,6 +41,7 @@ SEX_CHOICES = (
 
 
 class Persona(models.Model):
+    
     tipo = models.IntegerField(choices=TIPOS)
     area = models.IntegerField(choices=AREAS)
     # Datos del semestre
