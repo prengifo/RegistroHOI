@@ -212,7 +212,7 @@ class PersonaAdmin(admin.ModelAdmin):
 
     search_fields = ['nombres', 'apellidos', 'didentificacion', 'hospital_procedencia']
 
-    actions = [export_csv,export_xls]
+    actions = [export_csv]
 
 
 admin.site.register(Persona, PersonaAdmin)
