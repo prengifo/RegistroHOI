@@ -170,11 +170,11 @@ class PersonaAdmin(admin.ModelAdmin):
             if obj.tipo == 0:
                 tipo ='Pasantia'
             elif obj.tipo == 1:
-                'Post-Grado'
+                tipo = 'Post-Grado'
             elif obj.tipo == 2:
-                'Fellow'
+                tipo = 'Fellow'
             elif obj.tipo == 3:
-                'Visitor'
+                tipo = 'Visitor'
 
             if obj.estado_civil == 0:
                 estado_civil ='Soltero'
@@ -201,8 +201,8 @@ class PersonaAdmin(admin.ModelAdmin):
                 obj.estado_nacimiento,
                 obj.pais_nacimiento
             ]
-        for col_num in xrange(len(row)):
-            ws.write(row_num, col_num, row[col_num], font_style)
+            for col_num in xrange(len(row)):
+                ws.write(row_num, col_num, row[col_num], font_style)
 
         wb.save(response)
         return response
@@ -212,7 +212,7 @@ class PersonaAdmin(admin.ModelAdmin):
 
     search_fields = ['nombres', 'apellidos', 'didentificacion', 'hospital_procedencia']
 
-    actions = [export_csv]
+    actions = [export_csv, export_xls]
 
 
 admin.site.register(Persona, PersonaAdmin)
