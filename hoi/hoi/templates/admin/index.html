@@ -21,9 +21,9 @@
 			<a href="{{ app.app_url }}" class="section" title="{% blocktrans with name='Registro' %}Models in the {{ name }} application{% endblocktrans %}">
 			{% blocktrans with name='Registro' %}{{ name }}{% endblocktrans %}
 			</a>
-		    {% elif app.name == 'Inventory' %}
-		    	<a href="{{ app.app_url }}" class="section" title="{% blocktrans with name='Inventario' %}Models in the {{ name }} application{% endblocktrans %}">
-			{% blocktrans with name='Inventario' %}{{ name }}{% endblocktrans %}
+			{% elif app.name == 'Users' %}
+		    	<a href="{{ app.app_url }}" class="section" title="{% blocktrans with name='Usuarios' %}Models in the {{ name }} application{% endblocktrans %}">
+			{% blocktrans with name='Usuarios' %}{{ name }}{% endblocktrans %}
 			</a>
 		    {% else %} 
 		    <a href="{{ app.app_url }}" class="section" title="{% blocktrans with name=app.name %}Models in the {{ name }} application{% endblocktrans %}">
@@ -36,7 +36,11 @@
 		{% for model in app.models %}
 		    <tr>
 		    {% if model.admin_url %}
-			<th scope="row"><a href="{{ model.admin_url }}">{{ model.name }}</a></th>
+				{% if model.name == 'Users' %}
+					<th scope="row"><a href="{{ model.admin_url }}">{{ 'Usuarios' }}</a></th>
+				{% else %}
+					<th scope="row"><a href="{{ model.admin_url }}">{{ model.name }}</a></th>
+				{% endif %}
 		    {% else %}
 			<th scope="row">{{ model.name }}</th>
 		    {% endif %}

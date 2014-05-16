@@ -58,14 +58,14 @@ class Persona(models.Model):
     fecha_inicio = models.DateField('inicio periodo')
     fecha_fin = models.DateField('fin periodo')
 
-    foto = models.ImageField('foto', upload_to='fotos/',validators=[validate_image], null=True, blank=True)
+    foto = models.ImageField('foto', upload_to='fotos/',validators=[validate_image])
 
     # Datos de la persoan
     apellidos = models.CharField('apellidos', max_length=128)
     nombres = models.CharField('nombres', max_length=128)
     didentificacion = models.CharField('documento de identificacion', max_length=64)
     nacionalidad = models.CharField('nacionalidad', max_length=64)
-    sexo = models.PositiveIntegerField('sexo', choices=SEX_CHOICES)
+    sexo = models.PositiveIntegerField('genero', choices=SEX_CHOICES)
     fecha_nacimiento = models.DateField('fecha de nacimiento')
     estado_nacimiento = models.CharField('estado de nacimiento', max_length=64)
     pais_nacimiento = models.CharField('pais de nacimiento', max_length=64)
@@ -75,11 +75,11 @@ class Persona(models.Model):
     telefonos = models.CharField('telefonos', max_length=64)
 
     # Hospital de procedencia
-    hospital_procedencia = models.CharField('hospital/Instituo de procedencia', max_length=64)
-    hospital_procedencia_telefono = models.CharField('telefono Hospital/Instituto de procedencia', max_length=64, blank=True, null=True)
-    hospital_procedencia_direccion = models.TextField('direccion Hospital/Instituto de procedencia')
-    coordinador_docente = models.CharField('coordinador docente Hospital/Instituto de precedencia', max_length=64)
-    telefono_coordinador_docente = models.CharField('telefono coordinador docente Hospital/Instituto', max_length=64)
+    hospital_procedencia = models.CharField('hospital Instituto de procedencia', max_length=64)
+    hospital_procedencia_telefono = models.CharField('telefono Hospital Instituto de procedencia', max_length=64, blank=True, null=True)
+    hospital_procedencia_direccion = models.TextField('direccion Hospital Instituto de procedencia')
+    coordinador_docente = models.CharField('coordinador docente Hospital Instituto de precedencia', max_length=64)
+    telefono_coordinador_docente = models.CharField('telefono coordinador docente Hospital Instituto', max_length=64)
     email_coordinador_docente = models.EmailField('email coordinador docente', blank=True, null=True)
 
     # contacto de emergencia

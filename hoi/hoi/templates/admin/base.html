@@ -61,7 +61,16 @@
     <!-- Content -->
     <div id="content" class="{% block coltype %}colM{% endblock %}">
         {% block pretitle %}{% endblock %}
-        {% block content_title %}{% if title %}<h1>{{ title }}</h1>{% endif %}{% endblock %}
+        {% block content_title %}
+		{% if title %}
+			{% if title == 'Escoja persona a modificar' %}
+				<h1>{{ 'Seleccione un estudiante a editar' }}</h1>
+			{% elif title == 'Escoja user a modificar' %}
+				<h1>{{ 'Seleccione un usuario a editar' }}</h1>
+			{% else %}
+				<h1>{{ title }}</h1>
+			{% endif %}
+		{% endif %}{% endblock %}
         {% block content %}
         {% block object-tools %}{% endblock %}
         {{ content }}
