@@ -65,11 +65,11 @@ class PersonaAdmin(admin.ModelAdmin):
             if obj.tipo == 0:
                 tipo ='Pasantia'
             elif obj.tipo == 1:
-                'Post-Grado'
+                tipo = 'Post-Grado'
             elif obj.tipo == 2:
-                'Fellow'
+                tipo = 'Fellow'
             elif obj.tipo == 3:
-                'Visitor'
+                tipo = 'Visitor'
 
             if obj.estado_civil == 0:
                 estado_civil ='Soltero'
