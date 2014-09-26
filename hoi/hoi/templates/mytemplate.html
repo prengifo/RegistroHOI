@@ -94,7 +94,9 @@ Coordinación Docente Médica</br>
           <strong>Monografía:</strong> {{ persona.monografia|default_if_none:"___" }}
           <strong>Nota Monografía: </strong> {{ persona.nota_mono|default_if_none:"(__)" }}<br/>
           <strong>NOTA DEFINITIVA:</strong> {{ persona.nota_definitiva|default_if_none:"___" }}<br>
-           <strong>Amonestaciones:</strong> {{ persona.amonestaciones|default_if_none:"___" }}
+          <strong>Amonestaciones:</strong> {{ persona.amonestaciones|default_if_none:"___" }}
+          <br>
+          <strong>Observaciones:</strong> {{ persona.observaciones|default_if_none:"___" }}
         </div>
 
         <!-- <br> -->

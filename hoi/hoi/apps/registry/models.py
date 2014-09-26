@@ -45,12 +45,16 @@ SEX_CHOICES = (
 
 def validate_image(fieldfile_obj):
     filesize = fieldfile_obj.file.size
-    megabyte_limit = 1.0
-    if filesize > megabyte_limit*1024*1024:
-        raise ValidationError("Tamano maximo es %sMB" % str(megabyte_limit))
+    kilobyte_limit = 250
+    if filesize > kilobyte_limit*1024:
+        raise ValidationError("Tamano maximo es %sKB" % str(kilobyte_limit))
 
 
 class Persona(models.Model):
+  
+    class Meta:
+      verbose_name = "estudiante"
+      verbose_name_plural = "estudiantes"
 
     tipo = models.IntegerField(choices=TIPOS)
     area = models.IntegerField(choices=AREAS)
@@ -111,6 +115,7 @@ class Persona(models.Model):
 
     sintesis_curricular = models.TextField('sintesis curricular', help_text='solo necesario en caso de ser postgrado', blank=True, null=True)
 
+    observaciones = models.CharField(max_length=140, blank=True, null=True)
     # datos de aprobacion
     # TODO: lugar_aprobacion, fecha_aprobacion?
 
