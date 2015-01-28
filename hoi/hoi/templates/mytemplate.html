@@ -48,15 +48,19 @@ Coordinación Docente Médica</br>
         <div style="text-align:center;">
           <strong><font size="200%">Ficha Personal</font></strong><br><br>
          <strong>Programa de {{ persona.get_tipo_display }}</strong><br>
-          <strong>En area de {{ persona.get_area_display }}</strong><br>
+          <strong>{{ persona.get_area_display }}</strong><br>
           {% with mes1=persona.fecha_inicio|date:"F" mes2=persona.fecha_fin|date:"F" %}
-          <strong>Periodo: {% trans mes1 %} al {{ mes2 }} de {{ persona.fecha_inicio|date:"Y" }}</strong>
+          <strong>Periodo: {% trans mes1 %} - {{ mes2 }} de {{ persona.fecha_inicio|date:"Y" }}</strong>
           {% endwith %}
         </div>
         <div style="border: 1px solid #000; padding: 10px;font-size: 100%; line-height:1.8em;">
           <strong>Apellidos:</strong> {{ persona.apellidos }}<br/>
           <strong>Nombres:</strong> {{ persona.nombres }}<br/>
-          <strong>Documento de identificación:</strong> {{ persona.didentificacion }}
+          {% if persona.didentificacion.length <= 10 %}
+            <strong>Cédula:</strong> {{ persona.didentificacion }}
+          {% else %} 
+            <strong>Pasaporte:</strong> {{ persona.didentificacion }}
+          {% endif %}
           <strong>Nacionalidad:</strong> {{ persona.nacionalidad }}
           <strong>Sexo:</strong> {{persona.get_sexo_display}}<br/>
           <strong>Edad:</strong> {{persona.edad}}
@@ -76,26 +80,32 @@ Coordinación Docente Médica</br>
           <strong>Parentesco: </strong> {{ persona.parentesco_emergencia }}<br/>
           <strong>Teléfonos: </strong> {{ persona.telefono_emergencia }}<br/>
           <br/>
-          <strong>Nota Apreciativa Areas: </strong> {{ persona.nota_apreciativa|default_if_none:"(__)" }}%<br/>
-          <strong>Cad: </strong> {{ persona.nota_cadera|default_if_none:"__" }}
-          <strong>Col: </strong> {{ persona.nota_columna|default_if_none:"__" }}
-          <strong>Hom: </strong> {{ persona.nota_hombro|default_if_none:"__" }}
+          <strong>Nota Apreciativa Áreas: </strong> {{ persona.nota_apreciativa|default_if_none:"(__)" }}%<br/>
+          <strong>CAD: </strong> {{ persona.nota_cadera|default_if_none:"__" }}
+          <strong>COL: </strong> {{ persona.nota_columna|default_if_none:"__" }}
+          <strong>HOM: </strong> {{ persona.nota_hombro|default_if_none:"__" }}
           <strong>MSIS: </strong> {{ persona.nota_msis|default_if_none:"__" }}
           <strong>NO: </strong> {{ persona.nota_no|default_if_none:"__" }}
           <strong>OD: </strong> {{ persona.nota_od|default_if_none:"__" }}
-          <strong>Nota Apreciativa Examenes: </strong> {{ persona.nota_apreciativa1|default_if_none:"(__)" }}%<br/>
+          <!--    Ojo con esto, cambiar con los nuevos atributos        -->
+          <strong>Nota Apreciativa: </strong> {{ persona.nota_apreciativa1|default_if_none:"__" }}
+          <strong>Promedio: </strong> {{ persona.nota_apreciativa1|default_if_none:"__" }}<br/>
           <strong>Examen 1: </strong> {{ persona.examen1|default_if_none:"__" }}
           <strong>2: </strong> {{ persona.examen2|default_if_none:"__" }}
           <strong>3: </strong> {{ persona.examen3|default_if_none:"__" }}
           <strong>4: </strong> {{ persona.examen4|default_if_none:"__" }}
           <strong>5: </strong> {{ persona.examen5|default_if_none:"__" }}
-          <strong>6: </strong> {{ persona.examen6|default_if_none:"__" }}<br/>
-	  <strong>Nota Apreciativa Monografía: </strong> {{ persona.nota_apreciativa2|default_if_none:"(__)" }}%<br/>
+          <strong>6: </strong> {{ persona.examen6|default_if_none:"__" }}
+          <!--    Ojo con esto, cambiar con los nuevos atributos        -->
+          <strong>Promedio: </strong> {{ persona.examen6|default_if_none:"__" }}
+          <strong>Examen Final: </strong> {{ persona.examen6|default_if_none:"__" }}<br/>
           <strong>Monografía:</strong> {{ persona.monografia|default_if_none:"___" }}
-          <strong>Nota Monografía: </strong> {{ persona.nota_mono|default_if_none:"(__)" }}<br/>
+          <strong>Nota Monografía: </strong> {{ persona.nota_mono|default_if_none:"(__)" }}%<br/>
+          <strong>Nota Apreciativa Monografía: </strong> {{ persona.nota_apreciativa2|default_if_none:"(__)" }}%<br/>
+          <strong>Amonestaciones:</strong> {{ persona.amonestaciones|default_if_none:"(__)"}}%   
+          <!--  Poner atributo -->
+          <strong>Inasistencias: __<br></strong>
           <strong>NOTA DEFINITIVA:</strong> {{ persona.nota_definitiva|default_if_none:"___" }}<br>
-          <strong>Amonestaciones:</strong> {{ persona.amonestaciones|default_if_none:"___" }}
-          <br>
           <strong>Observaciones:</strong> {{ persona.observaciones|default_if_none:"___" }}
         </div>
 
