@@ -1,7 +1,7 @@
 from django.db.models import Count
 from apps.registry.models import Persona, Report
 import cStringIO as StringIO
-import ho.pisa as pisa
+import xhtml2pdf.pisa as pisa
 from django.template.loader import get_template
 from django.template import Context
 from django.http import HttpResponse, HttpResponseRedirect
