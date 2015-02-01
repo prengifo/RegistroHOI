@@ -41,6 +41,11 @@ SEX_CHOICES = (
     (1, 'Masculino')
 )
 
+TIPO_IDENTIFICACION_CHOICES = (
+    (0, 'V'),
+    (1, 'E'),
+)
+
 
 
 def validate_image(fieldfile_obj):
@@ -68,6 +73,7 @@ class Persona(models.Model):
     apellidos = models.CharField('apellidos', max_length=128)
     nombres = models.CharField('nombres', max_length=128)
     didentificacion = models.CharField('documento de identificacion', max_length=64)
+    tipo_identificacion = models.IntegerField(choices=TIPO_IDENTIFICACION_CHOICES)
     nacionalidad = models.CharField('nacionalidad', max_length=64)
     sexo = models.PositiveIntegerField('genero', choices=SEX_CHOICES)
     fecha_nacimiento = models.DateField('fecha de nacimiento')
@@ -82,6 +88,8 @@ class Persona(models.Model):
     hospital_procedencia = models.CharField('hospital Instituto de procedencia', max_length=64)
     hospital_procedencia_telefono = models.CharField('telefono Hospital Instituto de procedencia', max_length=64, blank=True, null=True)
     hospital_procedencia_direccion = models.TextField('direccion Hospital Instituto de procedencia')
+    hospital_procedencia_ciudad = models.TextField('ciudad del Hospital Instituto de procedencia')
+    hospital_procedencia_pais = models.TextField('pais del Hospital Instituto de procedencia')
     coordinador_docente = models.CharField('coordinador docente Hospital Instituto de precedencia', max_length=64)
     telefono_coordinador_docente = models.CharField('telefono coordinador docente Hospital Instituto', max_length=64)
     email_coordinador_docente = models.EmailField('email coordinador docente', blank=True, null=True)
@@ -92,32 +100,31 @@ class Persona(models.Model):
     telefono_emergencia = models.CharField('telefono de emergencia', help_text="en caso de emergencia llamar a este numero", max_length=64)
 
     # notas
-    nota_apreciativa = models.PositiveSmallIntegerField('nota apreciativa', blank=True, null=True)
+    nota_apreciativa = models.PositiveSmallIntegerField('nota apreciativa areas', blank=True, null=True)
     nota_cadera = models.PositiveSmallIntegerField('nota cadera (Cad)', blank=True, null=True)
     nota_columna = models.PositiveSmallIntegerField('nota columna (Col)', blank=True, null=True)
     nota_hombro = models.PositiveSmallIntegerField('nota hombro (Hom)', blank=True, null=True)
     nota_msis = models.PositiveSmallIntegerField('nota miembros inferiores (msis)', blank=True, null=True)
     nota_no = models.PositiveSmallIntegerField('nota NO', blank=True, null=True)
     nota_od = models.PositiveSmallIntegerField('nota OD', blank=True, null=True)
+    promedio_areas = models.CharField('promedio', max_length=8, blank=True, null=True)
     nota_apreciativa1 = models.PositiveSmallIntegerField('nota apreciativa examenes', blank=True, null=True)
+    examen_admision = models.PositiveSmallIntegerField('examen admision', blank=True, null=True)
     examen1 = models.PositiveSmallIntegerField('examen 1', blank=True, null=True)
     examen2 = models.PositiveSmallIntegerField('examen 2', blank=True, null=True)
     examen3 = models.PositiveSmallIntegerField('examen 3', blank=True, null=True)
     examen4 = models.PositiveSmallIntegerField('examen 4', blank=True, null=True)
     examen5 = models.PositiveSmallIntegerField('examen 5', blank=True, null=True)
     examen6 = models.PositiveSmallIntegerField('examen 6', blank=True, null=True)
-    nota_apreciativa2 = models.PositiveSmallIntegerField('nota apreciativa monografia', blank=True, null=True)
+    examen_final = models.PositiveSmallIntegerField('examen final', blank=True, null=True)
+    promedio_examenes = models.CharField('promedio examenes', max_length=8, blank=True, null=True)
     monografia = models.CharField('titulo de monografia', max_length=128, blank=True, null=True)
     nota_mono = models.PositiveSmallIntegerField('nota monografia', blank=True, null=True)
     nota_definitiva = models.PositiveSmallIntegerField('nota definitiva', blank=True, null=True)
-
     amonestaciones = models.PositiveSmallIntegerField('amonestaciones',blank=True,null =True)
-
+    asistencia = models.PositiveSmallIntegerField('asistencia',blank=True,null =True)
     sintesis_curricular = models.TextField('sintesis curricular', help_text='solo necesario en caso de ser postgrado', blank=True, null=True)
-
     observaciones = models.CharField(max_length=140, blank=True, null=True)
-    # datos de aprobacion
-    # TODO: lugar_aprobacion, fecha_aprobacion?
 
     @property
     def edad(self):
