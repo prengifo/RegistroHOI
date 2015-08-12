@@ -52,9 +52,9 @@
           <strong>Apellidos:</strong> {{ persona.apellidos }}
           <strong>Nombres:</strong> {{ persona.nombres }}<br/>
           {% if persona.didentificacion.length <= 8 %}
-            <strong>Cédula: </strong> {{ persona.get_tipo_identificacion_display }}-{{ persona.didentificacion }}
+            <strong>Cédula: </strong> {{ persona.didentificacion }}
           {% else %} 
-            <strong>Pasaporte: </strong> {{ persona.get_tipo_identificacion_display }}-{{ persona.didentificacion }}
+            <strong>Pasaporte: </strong> {{ persona.didentificacion }}
           {% endif %}
           <strong>Nacionalidad:</strong> {{ persona.nacionalidad }}
           <strong>Sexo:</strong> {{persona.get_sexo_display}}<br/>
